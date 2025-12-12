@@ -1,0 +1,79 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <title>FX ICT Smart-Money Analyzer</title>
+
+  <!-- Tailwind (dev CDN ok for testing) -->
+  <script src="https://cdn.tailwindcss.com"></script>
+
+  <!-- Lightweight Charts (correct bundle) -->
+  <script src="https://unpkg.com/lightweight-charts/dist/lightweight-charts.production.min.js"></script>
+
+  <link rel="stylesheet" href="style.css" />
+</head>
+<body class="bg-gray-100 text-gray-900">
+
+  <div class="max-w-7xl mx-auto p-6">
+    <h1 class="text-3xl md:text-4xl font-bold text-center mb-6">📊 FX ICT Smart-Money Analyzer (15m / 1h / 4h)</h1>
+
+    <div class="bg-white p-5 rounded-xl shadow mb-6">
+      <div class="flex flex-col md:flex-row items-center gap-4">
+        <div class="flex items-center gap-3">
+          <label class="font-semibold">Pair</label>
+          <select id="pairSelect" class="px-3 py-2 border rounded-lg"></select>
+        </div>
+
+        <div class="flex items-center gap-3">
+          <label class="font-semibold">Mode</label>
+          <select id="modeSelect" class="px-3 py-2 border rounded-lg">
+            <option value="standard">Standard</option>
+            <option value="conservative">Conservative</option>
+            <option value="aggressive">Aggressive</option>
+          </select>
+        </div>
+
+        <div class="ml-auto">
+          <button id="runBtn" class="px-5 py-2 bg-indigo-600 text-white rounded-lg hover:bg-indigo-700">
+            Run Analysis
+          </button>
+        </div>
+      </div>
+      <p class="text-xs text-gray-500 mt-3">Polygon: weekly/daily. TwelveData: 4H / 1H / 15m. Intraday falls back to daily when missing.</p>
+    </div>
+
+    <div id="results" class="space-y-4 mb-6"></div>
+
+    <div class="grid grid-cols-1 lg:grid-cols-2 gap-6">
+      <div class="bg-white p-6 rounded-xl shadow">
+        <div class="flex items-center justify-between mb-3">
+          <h2 class="text-xl font-bold">Price Chart (most granular)</h2>
+          <div id="chartMeta" class="text-sm text-gray-600"></div>
+        </div>
+        <div id="chart" style="height:460px; min-width:300px;"></div>
+      </div>
+
+      <div class="bg-white p-6 rounded-xl shadow">
+        <h2 class="text-xl font-bold mb-3">RSI</h2>
+        <div id="rsiChart" style="height:220px; min-width:300px;"></div>
+
+        <h3 class="text-lg font-semibold mt-6 mb-2">ICT Confidence</h3>
+        <div class="w-full bg-gray-200 rounded-full h-4 overflow-hidden mb-3">
+          <div id="confidenceBar" class="h-4 rounded-full" style="width:0%"></div>
+        </div>
+        <div id="confidenceText" class="text-sm text-gray-700">—</div>
+
+        <div class="mt-6">
+          <h4 class="font-semibold">Detected ICT Items</h4>
+          <ul id="ictList" class="text-sm text-gray-700 mt-2 space-y-1"></ul>
+        </div>
+      </div>
+    </div>
+
+    <footer class="text-xs text-gray-500 mt-6">Educational only — not financial advice.</footer>
+  </div>
+
+  <script src="script.js"></script>
+</body>
+</html>
